@@ -1,23 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8cvat4ducsfl"]
+[gd_scene load_steps=6 format=3 uid="uid://b8cvat4ducsfl"]
 
 [ext_resource type="Script" uid="uid://p5vytd8rcsac" path="res://character_body_3d.gd" id="1_wijl4"]
 [ext_resource type="MeshLibrary" uid="uid://bl8lpvl3fsjcd" path="res://Blocks1.tres" id="2_wijl4"]
+[ext_resource type="Script" uid="uid://cb5njuv7onja8" path="res://map.gd" id="3_map"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_p5pve"]
+[sub_resource type="Environment" id="Environment_dungeon"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.35, 0.35, 0.45, 1)
+ambient_light_energy = 0.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.8
 
 [node name="Map" type="Node3D"]
+script = ExtResource("3_map")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dungeon")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.85, 1.3947, -2.03125)
-input_capture_on_drag = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, -10)
 script = ExtResource("1_wijl4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0452123, 0)
-shape = SubResource("SphereShape3D_p5pve")
-
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(-0.212195, 0, -0.977227, 0, 1, 0, 0.977227, 0, -0.212195, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D/Camera3D"]
+light_color = Color(0.847328, 0.555576, 4.62055e-06, 1)
+light_energy = 4.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+omni_range = 14.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_player")
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("2_wijl4")
