@@ -4,10 +4,24 @@ extends Node3D
 # generamos al iniciar a partir de la malla de cada bloque colocado en el GridMap.
 
 @onready var grid_map: GridMap = $GridMap
+@onready var exit_area: Area3D = $Salida
 
 
 func _ready() -> void:
 	_build_collisions()
+	exit_area.body_entered.connect(_on_exit_entered)
+
+
+# Atajo de respaldo: la tecla Q vuelve a la ciudad desde cualquier punto.
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.physical_keycode == KEY_Q:
+		GameState.return_to_overworld()
+
+
+func _on_exit_entered(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		GameState.return_to_overworld()
 
 
 func _build_collisions() -> void:

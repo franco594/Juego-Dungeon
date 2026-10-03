@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://player_arrow.gd" id="1_script"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_arrow"]
+size = Vector3(2, 2.8, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_arrow"]
+shading_mode = 0
+no_depth_test = true
+albedo_color = Color(1, 0.85, 0.2, 1)
+
+[sub_resource type="CylinderShape3D" id="Cyl_player"]
+height = 1.0
+radius = 0.9
+
+[node name="PlayerArrow" type="CharacterBody3D"]
+axis_lock_linear_y = true
+motion_mode = 1
+script = ExtResource("1_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+material_override = SubResource("Mat_arrow")
+mesh = SubResource("PrismMesh_arrow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Cyl_player")
