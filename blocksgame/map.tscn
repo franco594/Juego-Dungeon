@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8cvat4ducsfl"]
 
 [ext_resource type="Script" uid="uid://p5vytd8rcsac" path="res://character_body_3d.gd" id="1_wijl4"]
-[ext_resource type="MeshLibrary" uid="uid://bq8erwmlky42c" path="res://Blocks1.tres" id="2_wijl4"]
+[ext_resource type="MeshLibrary" uid="uid://bq8erwmlky42c" path="res://assets/Blocks1.tres" id="2_wijl4"]
 [ext_resource type="Script" uid="uid://cb5njuv7onja8" path="res://map.gd" id="3_map"]
 
 [sub_resource type="Environment" id="Environment_dungeon"]
