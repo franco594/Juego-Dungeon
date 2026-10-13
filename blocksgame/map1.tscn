@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bd60kjl5knqh2" path="res://map1.gd" id="1_cf5bg"]
 [ext_resource type="Script" uid="uid://ceisiosg7smox" path="res://overworld_player.gd" id="2_flm4b"]
 [ext_resource type="MeshLibrary" uid="uid://cegx0apxa35qh" path="res://assets/CityMap.tres" id="3_bwbs4"]
-[ext_resource type="PackedScene" uid="uid://conlolua2pb2o" path="res://assets/MiniCharacter.glb" id="4_player"]
+[ext_resource type="PackedScene" uid="uid://bgrush1y7gyft" path="res://assets/objects/CharacterMapIcon.glb" id="4_bwbs4"]
 
 [sub_resource type="Environment" id="Environment_55y45"]
 background_mode = 1
@@ -35,8 +35,7 @@ script = ExtResource("2_flm4b")
 [node name="Visual" type="Node3D" parent="CharacterBody3D"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.5, 0)
 
-[node name="MiniCharacter" parent="CharacterBody3D/Visual" instance=ExtResource("4_player")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+[node name="CharacterMapIcon" parent="CharacterBody3D/Visual" instance=ExtResource("4_bwbs4")]
 
 [node name="CameraPivot" type="Node3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.992809, 0.119712, 0, -0.119712, 0.992809, 0, 1.35, 0)
