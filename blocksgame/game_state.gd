@@ -13,5 +13,4 @@ func enter_dungeon(scene_path: String, back_position: Vector3) -> void:
 
 
 func return_to_overworld() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file.call_deferred("res://overworld.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://map1.tscn")
