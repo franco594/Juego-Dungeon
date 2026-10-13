@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3ik5oe6u3wr8"]
 
-[ext_resource type="Script" path="res://map_2.gd" id="1_kyc3v"]
-[ext_resource type="Script" uid="uid://p5vytd8rcsac" path="res://character_body_3d.gd" id="3_55y45"]
-[ext_resource type="MeshLibrary" uid="uid://cegx0apxa35qh" path="res://assets/CityMap.tres" id="3_nwr2e"]
+[ext_resource type="Script" uid="uid://c4lkiib48xm8b" path="res://map_2.gd" id="1_cf5bg"]
+[ext_resource type="Script" uid="uid://p5vytd8rcsac" path="res://character_body_3d.gd" id="2_flm4b"]
+[ext_resource type="MeshLibrary" uid="uid://cegx0apxa35qh" path="res://assets/CityMap.tres" id="3_bwbs4"]
 
 [sub_resource type="Environment" id="Environment_55y45"]
 background_mode = 1
@@ -18,14 +18,14 @@ height = 1.8
 size = Vector3(3.7569, 3, 4.08112)
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_kyc3v")
+script = ExtResource("1_cf5bg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_55y45")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.49216, -14.8682)
-script = ExtResource("3_55y45")
+script = ExtResource("2_flm4b")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -39,7 +39,7 @@ omni_range = 14.0
 shape = SubResource("CapsuleShape3D_nwr2e")
 
 [node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("3_nwr2e")
+mesh_library = ExtResource("3_bwbs4")
 cell_size = Vector3(4, 4, 4)
 cell_center_y = false
 data = {
