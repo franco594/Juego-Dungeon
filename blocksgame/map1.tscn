@@ -1,61 +1,40 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3ik5oe6u3wr8"]
+[gd_scene load_steps=7 format=3 uid="uid://d3ik5oe6u3wr8"]
 
-[ext_resource type="Script" uid="uid://bd60kjl5knqh2" path="res://map1.gd" id="1_cf5bg"]
-[ext_resource type="Script" uid="uid://ceisiosg7smox" path="res://overworld_player.gd" id="2_flm4b"]
+[ext_resource type="Script" uid="uid://c7chk4y0qwf30" path="res://map1.gd" id="1_cf5bg"]
 [ext_resource type="MeshLibrary" uid="uid://cegx0apxa35qh" path="res://assets/CityMap.tres" id="3_bwbs4"]
-[ext_resource type="PackedScene" uid="uid://bgrush1y7gyft" path="res://assets/objects/CharacterMapIcon.glb" id="4_bwbs4"]
+[ext_resource type="PackedScene" path="res://player_arrow.tscn" id="4_flecha"]
+[ext_resource type="Script" uid="uid://wfpaisov22qj" path="res://camera_follow.gd" id="5_camara"]
+[ext_resource type="PackedScene" path="res://entrada.tscn" id="6_entrada"]
 
-[sub_resource type="Environment" id="Environment_55y45"]
+[sub_resource type="Environment" id="Environment_smt"]
 background_mode = 1
-background_color = Color(0.055, 0.045, 0.075, 1)
+background_color = Color(0.06, 0.055, 0.08, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.27, 0.23, 0.34, 1)
-ambient_light_energy = 0.45
+ambient_light_color = Color(0.62, 0.6, 0.7, 1)
+ambient_light_energy = 0.35
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.4
+glow_bloom = 0.05
 fog_enabled = true
-fog_light_color = Color(0.22, 0.18, 0.28, 1)
-fog_density = 0.008
+fog_light_color = Color(0.16, 0.14, 0.2, 1)
+fog_density = 0.006
+adjustment_enabled = true
+adjustment_brightness = 0.8
+adjustment_contrast = 1.12
+adjustment_saturation = 0.55
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwr2e"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_55y45"]
-size = Vector3(3.7569, 3, 4.08112)
-
-[node name="Node3D" type="Node3D"]
+[node name="Ciudad" type="Node3D"]
 script = ExtResource("1_cf5bg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_55y45")
+environment = SubResource("Environment_smt")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, -14.8682)
-script = ExtResource("2_flm4b")
-
-[node name="Visual" type="Node3D" parent="CharacterBody3D"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.5, 0)
-
-[node name="CharacterMapIcon" parent="CharacterBody3D/Visual" instance=ExtResource("4_bwbs4")]
-
-[node name="CameraPivot" type="Node3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.992809, 0.119712, 0, -0.119712, 0.992809, 0, 1.35, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/CameraPivot"]
-spring_length = 5.5
-margin = 0.2
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivot/SpringArm3D"]
-current = true
-fov = 58.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D/CameraPivot/SpringArm3D/Camera3D"]
-light_color = Color(0.55, 0.62, 0.95, 1)
-light_energy = 0.55
-omni_range = 7.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_nwr2e")
+[node name="Luna" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.852525, -0.409435, 0.324908, 0, 0.62161, 0.783327, -0.522687, -0.667805, 0.529938, 0, 20, 0)
+light_color = Color(0.85, 0.86, 1, 1)
+light_energy = 0.6
+shadow_enabled = true
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("3_bwbs4")
@@ -66,9 +45,46 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Salida" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -17)
+[node name="Flecha" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("4_flecha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.7, -14)
+grid_map = NodePath("../GridMap")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Salida"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0874939, 0, -0.596783)
-shape = SubResource("BoxShape3D_55y45")
+[node name="Camara" type="Camera3D" parent="." node_paths=PackedStringArray("objetivo")]
+current = true
+fov = 40.0
+script = ExtResource("5_camara")
+objetivo = NodePath("../Flecha")
+
+[node name="EntradaDungeon" parent="." instance=ExtResource("6_entrada")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
+nombre_lugar = "Dungeon"
+punto_regreso = Vector3(5, 0, 0)
+altura_marcador = 5.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="NombreZona" type="Label" parent="HUD"]
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 432.0
+offset_bottom = 74.0
+theme_override_colors/font_color = Color(0.92, 0.9, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+text = "CIUDAD"
+
+[node name="Controles" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -52.0
+offset_right = 632.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.75, 0.74, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "WASD / flechas: mover    Shift: correr    E / Enter: entrar"

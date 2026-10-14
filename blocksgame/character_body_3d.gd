@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+# Jugador del dungeon en primera persona.
+
 @export var speed := 5.0
 @export var mouse_sensitivity := 0.003
 
@@ -8,6 +10,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready() -> void:
+	add_to_group("jugador")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -26,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	var input_dir := _get_input_vector()
+	var input_dir := Input.get_vector("mover_izquierda", "mover_derecha", "mover_arriba", "mover_abajo")
 	var direction := (transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)).normalized()
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
@@ -34,15 +37,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-# WASD o flechas, sin tocar el Input Map del proyecto.
-func _get_input_vector() -> Vector2:
-	var v := Vector2.ZERO
-	if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):
-		v.y -= 1.0
-	if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
-		v.y += 1.0
-	if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT):
-		v.x -= 1.0
-	if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT):
-		v.x += 1.0
-	return v.normalized()
+func _exit_tree() -> void:
+	# Al volver al mapa del mundo el cursor queda libre.
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

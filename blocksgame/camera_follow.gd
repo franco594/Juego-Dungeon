@@ -1,21 +1,33 @@
 extends Camera3D
 
-# Cámara con ángulo fijo que sigue al objetivo manteniendo siempre el mismo offset.
+# Cámara del mapa del mundo: ángulo fijo e inclinado (estilo SMT III) que sigue al
+# objetivo manteniendo siempre el mismo desplazamiento.
 
-@export var target: Node3D
-@export var offset := Vector3(0.0, 25.0, 14.4)
-@export var smoothing := 8.0
+@export var objetivo: Node3D
+## Desde dónde mira, relativo al objetivo. Más Y = más cenital; más Z = más inclinada.
+@export var desplazamiento := Vector3(0.0, 22.0, 13.0)
+@export var suavizado := 6.0
 
-var _snapped := false
+var _ubicada := false
+
+
+func _ready() -> void:
+	_ubicar()
 
 
 func _process(delta: float) -> void:
-	if target == null:
+	if objetivo == null:
 		return
-	var goal := target.global_position + offset
-	if not _snapped:
-		# Primer cuadro: se coloca directo, sin deslizarse desde otra posición.
-		global_position = goal
-		_snapped = true
+	if not _ubicada:
+		_ubicar()
 		return
-	global_position = global_position.lerp(goal, clampf(smoothing * delta, 0.0, 1.0))
+	var meta := objetivo.global_position + desplazamiento
+	global_position = global_position.lerp(meta, clampf(suavizado * delta, 0.0, 1.0))
+
+
+# Se coloca directo (sin deslizarse) y fija la orientación una sola vez.
+func _ubicar() -> void:
+	if objetivo == null:
+		return
+	look_at_from_position(objetivo.global_position + desplazamiento, objetivo.global_position)
+	_ubicada = true

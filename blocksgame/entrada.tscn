@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://entrada.gd" id="1_entrada"]
+
+[sub_resource type="BoxShape3D" id="Box_area"]
+resource_local_to_scene = true
+size = Vector3(6, 3, 4)
+
+[sub_resource type="StandardMaterial3D" id="Mat_pin"]
+render_priority = 1
+shading_mode = 0
+no_depth_test = true
+albedo_color = Color(0.25, 0.95, 0.45, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_pin"]
+material = SubResource("Mat_pin")
+top_radius = 0.8
+bottom_radius = 0.0
+height = 1.8
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_anillo"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.25, 0.95, 0.45, 0.35)
+
+[sub_resource type="TorusMesh" id="Mesh_anillo"]
+material = SubResource("Mat_anillo")
+inner_radius = 1.4
+outer_radius = 1.7
+rings = 24
+ring_segments = 4
+
+[node name="Entrada" type="Area3D"]
+script = ExtResource("1_entrada")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("Box_area")
+
+[node name="Marcador" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Pin" type="MeshInstance3D" parent="Marcador"]
+cast_shadow = 0
+mesh = SubResource("Mesh_pin")
+
+[node name="Nombre" type="Label3D" parent="Marcador"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+pixel_size = 0.02
+billboard = 1
+no_depth_test = true
+render_priority = 3
+outline_render_priority = 2
+modulate = Color(0.85, 1, 0.88, 1)
+outline_modulate = Color(0.02, 0.08, 0.04, 1)
+text = "Lugar"
+font_size = 40
+outline_size = 10
+
+[node name="Anillo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+cast_shadow = 0
+mesh = SubResource("Mesh_anillo")
+
+[node name="Aviso" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+visible = false
+pixel_size = 0.02
+billboard = 1
+no_depth_test = true
+render_priority = 3
+outline_render_priority = 2
+outline_modulate = Color(0, 0, 0, 1)
+text = "[E] Entrar"
+font_size = 32
+outline_size = 8

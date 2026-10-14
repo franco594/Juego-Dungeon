@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8cvat4ducsfl"]
+[gd_scene load_steps=7 format=3 uid="uid://b8cvat4ducsfl"]
 
 [ext_resource type="Script" uid="uid://p5vytd8rcsac" path="res://character_body_3d.gd" id="1_wijl4"]
 [ext_resource type="MeshLibrary" uid="uid://da2slgc10vl3j" path="res://assets/House.tres" id="3_e0an3"]
 [ext_resource type="Script" uid="uid://cb5njuv7onja8" path="res://map.gd" id="3_map"]
-[ext_resource type="PackedScene" uid="uid://cfavsljhdjt8o" path="res://assets/Player_Arms.glb" id="3_p5pve"]
 
 [sub_resource type="Environment" id="Environment_dungeon"]
 background_mode = 1
@@ -36,9 +35,6 @@ light_color = Color(1, 0.78, 0.5, 1)
 light_energy = 2.0
 omni_range = 14.0
 
-[node name="Player_Arms" parent="CharacterBody3D/Camera3D" instance=ExtResource("3_p5pve")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_player")
 
@@ -46,7 +42,7 @@ shape = SubResource("CapsuleShape3D_player")
 mesh_library = ExtResource("3_e0an3")
 cell_size = Vector3(4, 4, 4)
 data = {
-"cells": PackedInt32Array(65539, 0, 1048616, 65538, 0, 1048616, 0, 65530, 1, 0, 65531, 1, 0, 65532, 1048608, 1, 65532, 1, 1, 65531, 1, 1, 65530, 1, 0, 65529, 1, 1, 65529, 1, 2, 65530, 0, 2, 65529, 1, 2, 65531, 1, 2, 65532, 1, 1, 65533, 1, 2, 65533, 1, 0, 65533, 1, 3, 65529, 1, 3, 65530, 1, 3, 65531, 1, 3, 65532, 1, 3, 65533, 1, 4, 65529, 1, 4, 65530, 1, 4, 65531, 1, 4, 65532, 1, 4, 65533, 1, 5, 65529, 1, 5, 65530, 19, 5, 65531, 1, 5, 65532, 1, 5, 65533, 1, 6, 65529, 1, 6, 65530, 19, 6, 65531, 1, 6, 65532, 1, 6, 65533, 655396)
+"cells": PackedInt32Array(0, 65530, 1, 0, 65531, 1, 0, 65532, 1048608, 1, 65532, 1, 1, 65531, 1, 1, 65530, 1, 0, 65529, 1, 1, 65529, 1, 2, 65530, 0, 2, 65529, 1, 2, 65531, 1, 2, 65532, 1, 1, 65533, 1, 2, 65533, 1, 0, 65533, 1, 3, 65529, 1, 3, 65530, 1, 3, 65531, 1, 3, 65532, 1, 3, 65533, 1, 4, 65529, 1, 4, 65530, 1, 4, 65531, 1, 4, 65532, 1, 4, 65533, 1, 5, 65529, 1, 5, 65530, 19, 5, 65531, 1, 5, 65532, 1, 5, 65533, 1, 6, 65529, 1, 6, 65530, 19, 6, 65531, 1, 6, 65532, 1, 6, 65533, 655396)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
