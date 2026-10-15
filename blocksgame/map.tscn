@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8cvat4ducsfl"]
 
 [ext_resource type="Script" uid="uid://p5vytd8rcsac" path="res://character_body_3d.gd" id="1_wijl4"]
-[ext_resource type="MeshLibrary" uid="uid://da2slgc10vl3j" path="res://assets/House.tres" id="3_e0an3"]
+[ext_resource type="MeshLibrary" uid="uid://foigbsus1qed" path="res://assets/House1.tres" id="3_e0an3"]
 [ext_resource type="Script" uid="uid://cb5njuv7onja8" path="res://map.gd" id="3_map"]
 
 [sub_resource type="Environment" id="Environment_dungeon"]
@@ -40,7 +40,6 @@ shape = SubResource("CapsuleShape3D_player")
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("3_e0an3")
-cell_size = Vector3(4, 4, 4)
 data = {
 "cells": PackedInt32Array(0, 65530, 1, 0, 65531, 1, 0, 65532, 1048608, 1, 65532, 1, 1, 65531, 1, 1, 65530, 1, 0, 65529, 1, 1, 65529, 1, 2, 65530, 0, 2, 65529, 1, 2, 65531, 1, 2, 65532, 1, 1, 65533, 1, 2, 65533, 1, 0, 65533, 1, 3, 65529, 1, 3, 65530, 1, 3, 65531, 1, 3, 65532, 1, 3, 65533, 1, 4, 65529, 1, 4, 65530, 1, 4, 65531, 1, 4, 65532, 1, 4, 65533, 1, 5, 65529, 1, 5, 65530, 19, 5, 65531, 1, 5, 65532, 1, 5, 65533, 1, 6, 65529, 1, 6, 65530, 19, 6, 65531, 1, 6, 65532, 1, 6, 65533, 655396)
 }
