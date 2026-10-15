@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://cex1ut1r20d4"]
 
-[ext_resource type="Script" path="res://entrada.gd" id="1_entrada"]
+[ext_resource type="Script" uid="uid://blynet7ou485f" path="res://entrada.gd" id="1_entrada"]
 
 [sub_resource type="BoxShape3D" id="Box_area"]
 resource_local_to_scene = true
@@ -8,8 +8,8 @@ size = Vector3(6, 3, 4)
 
 [sub_resource type="StandardMaterial3D" id="Mat_pin"]
 render_priority = 1
-shading_mode = 0
 no_depth_test = true
+shading_mode = 0
 albedo_color = Color(0.25, 0.95, 0.45, 1)
 
 [sub_resource type="CylinderMesh" id="Mesh_pin"]
@@ -66,13 +66,10 @@ mesh = SubResource("Mesh_anillo")
 
 [node name="Aviso" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-visible = false
 pixel_size = 0.02
 billboard = 1
 no_depth_test = true
 render_priority = 3
 outline_render_priority = 2
-outline_modulate = Color(0, 0, 0, 1)
 text = "[E] Entrar"
-font_size = 32
 outline_size = 8

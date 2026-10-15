@@ -1,21 +1,8 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://bibsfnvdlwagy"]
 
-[ext_resource type="Script" path="res://player_arrow.gd" id="1_script"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_arrow"]
-size = Vector3(1.5, 2.1, 0.25)
-
-[sub_resource type="StandardMaterial3D" id="Mat_arrow"]
-render_priority = 2
-shading_mode = 0
-no_depth_test = true
-albedo_color = Color(1, 0.86, 0.25, 1)
-
-[sub_resource type="StandardMaterial3D" id="Mat_borde"]
-render_priority = 1
-shading_mode = 0
-no_depth_test = true
-albedo_color = Color(0.08, 0.06, 0.1, 1)
+[ext_resource type="Script" uid="uid://kh0mfw12jvms" path="res://player_arrow.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://bgrush1y7gyft" path="res://assets/objects/CharacterMapIcon.glb" id="2_icono"]
+[ext_resource type="Script" uid="uid://dx8ygg7nefq0h" path="res://icono_fantasma.gd" id="3_fantasma"]
 
 [sub_resource type="CylinderShape3D" id="Cyl_player"]
 height = 1.0
@@ -27,18 +14,11 @@ motion_mode = 1
 script = ExtResource("1_script")
 
 [node name="Modelo" type="Node3D" parent="."]
+script = ExtResource("3_fantasma")
+alfa_oculto = 0.3
 
-[node name="Borde" type="MeshInstance3D" parent="Modelo"]
-transform = Transform3D(1.25, 0, 0, 0, 0, 1, 0, -1.2, 0, 0, -0.02, 0.05)
-material_override = SubResource("Mat_borde")
-cast_shadow = 0
-mesh = SubResource("PrismMesh_arrow")
-
-[node name="Cuerpo" type="MeshInstance3D" parent="Modelo"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
-material_override = SubResource("Mat_arrow")
-cast_shadow = 0
-mesh = SubResource("PrismMesh_arrow")
+[node name="Icono" parent="Modelo" instance=ExtResource("2_icono")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.8, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("Cyl_player")
